@@ -35,13 +35,37 @@ export default class App extends Component {
         title: "청소하기",
         completed: false
       }
-    ]
-  }
+    ],
+
+    value: ""
+  };
   
   handleClick = (id) => {
     let newTodoData = this.state.todoData.filter(data => data.id !== id);
     console.log('newTodoData', newTodoData);
     this.setState({todoData: newTodoData});
+  };
+
+  handleChange = (e) => {
+    //console.log('e', e.target.value);
+    this.setState({value: e.target.value});
+  };
+
+  handleSubmit = (e) => {
+    //클릭 하면 페이지가 새로고침 되는 것을 방지해줌
+    e.preventDefault();
+    
+    //새로운 할 일 데이터 추가하기
+    let newTodo = {
+      id: Date.now(), //고유 키값을 얻기위해 그냥 Date.now() 메서드사용
+      title: this.state.value,
+      completed: false
+    }
+
+    //원래 있던 할 일에 새로운 할 일 더해주기
+    this.setState({ todoData: [...this.state.todoData, newTodo]});
+    // 기존에있던 데이터들에서 newTodo 를 추가하는 것이기때문에 전개연산자 사용
+
   }
 
 
@@ -63,6 +87,23 @@ export default class App extends Component {
             </div>
 
           ))}
+
+          <form style={{ display: "flex"}} onSubmit={this.handleSubmit}>
+              <input 
+              type="text" 
+              name="value" 
+              style={{ flex: "10", padding: "5px"}} 
+              placeholder="해야 할 일을 입력해주세요."
+              value={this.state.value}
+              onChange={this.handleChange}
+              />
+              <input
+              type="submit"
+              value="입력"
+              className="btn"
+              style={{flex: "1"}}
+              />
+          </form>
         </div>
       </div>
     )
