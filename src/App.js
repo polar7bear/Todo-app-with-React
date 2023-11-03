@@ -1,28 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 import List from "./components/List";
+import Form from "./components/Form";
 
 export default function App() {
 
-
-  
-  
-  
-
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] = useState("");
-  
-  
 
-  const handleChange = (e) => {
-    //console.log('e', e.target.value);
-    setValue(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     //클릭 하면 페이지가 새로고침 되는 것을 방지해줌
     e.preventDefault();
-    
+
     //새로운 할 일 데이터 추가하기
     let newTodo = {
       id: Date.now(), //고유 키값을 얻기위해 그냥 Date.now() 메서드사용
@@ -37,36 +27,18 @@ export default function App() {
 
   }
 
-  
-
-
-  
-    return(
-      <div className="container">    {/* 이와 같이 함수 안에 html 문법을 작성 하는것을 jsx라고 한다. */}
-        <div className="todoBlock">  {/* 리액트의 barbel이 이러한 jsx문법을 createElement 형식으로 변환해줌 */}
-          <div className="title">   {/* jsx에서는 className이라고 명시해야 한다. */}
-            <h1>할 일 목록</h1>
-          </div>
-
-          <List todoData={todoData} setTodoData={setTodoData} />
-
-          <form style={{ display: "flex"}} onSubmit={handleSubmit}>
-              <input 
-              type="text" 
-              name="value" 
-              style={{ flex: "10", padding: "5px"}} 
-              placeholder="해야 할 일을 입력해주세요."
-              value={value}
-              onChange={handleChange}
-              />
-              <input
-              type="submit"
-              value="입력"
-              className="btn"
-              style={{flex: "1"}}
-              />
-          </form>
+  return (
+    <div className="container">    {/* 이와 같이 함수 안에 html 문법을 작성 하는것을 jsx라고 한다. */}
+      <div className="todoBlock">  {/* 리액트의 barbel이 이러한 jsx문법을 createElement 형식으로 변환해줌 */}
+        <div className="title">   {/* jsx에서는 className이라고 명시해야 한다. */}
+          <h1>할 일 목록</h1>
         </div>
+
+        <List todoData={todoData} setTodoData={setTodoData} />
+
+        <Form value={value} setValue={setValue} handleSubmit={handleSubmit} />
+
       </div>
-    )
-  }
+    </div>
+  )
+}
