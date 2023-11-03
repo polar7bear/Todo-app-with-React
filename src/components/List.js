@@ -3,19 +3,12 @@ import React from 'react'
 
 export default function List({ todoData, setTodoData }) {
 
-  const btnStyle = {
-    color: "fff",
-    border: "none",
-    padding: "5px 9px",
-    borderRadius: "50%",
-    cursor: "pointer",
-    float: "right"
-  };
+  
 
   // 버튼 클릭했을때 textDecoration 속성을 line-through 로 바꿔주기 위한 이벤트함수
   const handleCompleteChange = (id) => {
     let newTodoData = todoData.map((data) => {
-      if(data.id === id) {  // 고유 key id와 일치한다면
+      if (data.id === id) {  // 고유 key id와 일치한다면
         data.completed = !data.completed; //누를때 마다 true or false로 변경
       }
       return data;
@@ -29,26 +22,24 @@ export default function List({ todoData, setTodoData }) {
     setTodoData(newTodoData);
   };
 
-  const getStyle = (completed) => {
-    return {
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      textDecoration: completed ? "line-through" : "none" // 신기하다.
-    }
-  };
-
   return (
     <div>
-        {todoData.map((data) => (
-            <div style={getStyle(data.completed)} key={data.id}> 
-            {/* 리액트에서 요소의 리스트를 나열 할 때는 key를 넣어줘야한다.
+      {todoData.map((data) => (
+        <div key={data.id}>
+          {/* 리액트에서 요소의 리스트를 나열 할 때는 key를 넣어줘야한다.
               jsx key를 명시함으로써 변경, 추가 및 제거 된 항목을 식별하는데 도움이 됨. */}
-              <input type="checkbox" defaultChecked={false} onChange={() => handleCompleteChange(data.id)} />
-              {data.title}
-              <button style={btnStyle} onClick={() => handleClick(data.id)}>x</button>
+          <div className='flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 bg-gray-100 border rounded'>
+            <div className='items-center'>
+              <input type="checkbox" className="mr-2" defaultChecked={false} onChange={() => handleCompleteChange(data.id)} />
+              <span className={data.completed ? "line-through" : undefined}>{data.title}</span>
             </div>
+            <div className='items-center'>
+              <button className='px-4 py-2 float-right' onClick={() => handleClick(data.id)}>x</button>
+            </div>
+          </div>
+        </div>
 
-          ))}
+      ))}
     </div>
   )
 }

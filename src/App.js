@@ -28,13 +28,12 @@ export default function App() {
   }
 
   return (
-    <div className="container">    {/* 이와 같이 함수 안에 html 문법을 작성 하는것을 jsx라고 한다. */}
-      <div className="todoBlock">  {/* 리액트의 barbel이 이러한 jsx문법을 createElement 형식으로 변환해줌 */}
-        <div className="title">   {/* jsx에서는 className이라고 명시해야 한다. */}
+    <div className="flex items-center justify-center w-screen h-screen bg-blue-200">    {/* 이와 같이 함수 안에 html 문법을 작성 하는것을 jsx라고 한다. */}
+      <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg">  {/* 리액트의 barbel이 이러한 jsx문법을 createElement 형식으로 변환해줌 */}
+        <div className="flex justify-between mb-3">   {/* jsx에서는 className이라고 명시해야 한다. */}
           <h1>할 일 목록</h1>
         </div>
 
-        <h1 className="text-3xl font-bold underline">Hello World!</h1>
         <List todoData={todoData} setTodoData={setTodoData} />
 
         <Form value={value} setValue={setValue} handleSubmit={handleSubmit} />
