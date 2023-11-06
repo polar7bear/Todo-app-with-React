@@ -1,6 +1,6 @@
 import React from 'react'
 
-const List = ({
+const List = React.memo(({
     id,
     title,
     completed,
@@ -9,7 +9,6 @@ const List = ({
     provided,
     snapshot
 }) => {
-
 
     // 버튼 클릭했을때 textDecoration 속성을 line-through 로 바꿔주기 위한 이벤트함수
     const handleCompleteChange = (id) => {
@@ -42,7 +41,7 @@ const List = ({
                 <button className='px-4 py-2 float-right' onClick={() => handleClick(id)}>x</button>
             </div>
         </div>
-    )
-}
+    );
+});
 
 export default List
