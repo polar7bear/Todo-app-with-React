@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./App.css";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
@@ -27,6 +27,11 @@ export default function App() {
 
   }
 
+  const handleClick = useCallback((id) => {
+    let newTodoData = todoData.filter(data => data.id !== id);
+    setTodoData(newTodoData);
+  }, [todoData]);
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-blue-200">    {/* 이와 같이 함수 안에 html 문법을 작성 하는것을 jsx라고 한다. */}
       <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg">  {/* 리액트의 barbel이 이러한 jsx문법을 createElement 형식으로 변환해줌 */}
@@ -34,7 +39,7 @@ export default function App() {
           <h1>할 일 목록</h1>
         </div>
 
-        <Lists todoData={todoData} setTodoData={setTodoData} />
+        <Lists handleClick={handleClick} todoData={todoData} setTodoData={setTodoData} />
 
         <Form value={value} setValue={setValue} handleSubmit={handleSubmit} />
 

@@ -7,7 +7,8 @@ const List = React.memo(({
     todoData,
     setTodoData,
     provided,
-    snapshot
+    snapshot,
+    handleClick
 }) => {
 
     // 버튼 클릭했을때 textDecoration 속성을 line-through 로 바꿔주기 위한 이벤트함수
@@ -22,10 +23,6 @@ const List = React.memo(({
         setTodoData(newTodoData);
     };
 
-    const handleClick = (id) => {
-        let newTodoData = todoData.filter(data => data.id !== id);
-        setTodoData(newTodoData);
-    };
 
     return (
         <div key={id} {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}

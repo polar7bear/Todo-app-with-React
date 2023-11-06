@@ -5,7 +5,7 @@ import List from './List';
 
 
 
-const Lists = React.memo(({ todoData, setTodoData }) => {
+const Lists = React.memo(({ todoData, setTodoData, handleClick }) => {
 
   const handleEnd = (result) => {
     if (!result.destination) return;
@@ -35,6 +35,7 @@ const Lists = React.memo(({ todoData, setTodoData }) => {
                 >
                   {(provided, snapshot) => (
                     <List
+                    handleClick={handleClick}
                       key={data.id}
                       id={data.id}
                       title={data.title}
